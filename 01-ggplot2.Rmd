@@ -8,10 +8,10 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
-
 # En este bloque cargá los paquetes que vas a necesitar
-
+library(dplyr)
+library(ggplot2)
+library(datos)
 ```
 
 # Preparación
@@ -33,46 +33,52 @@ Además de escribir el código para generar el gráfico, escribí como mínimo u
 
 1. Hacé un gráfico de puntos de "autopista" versus "cilindros".
 ¿Qué conclusión sacás?
+- A partir del grafico podemos observar que a medida que aumenta el numero de cilindros, la eficiencia en carretera tiende a disminuir.
 
 ```{r}
-ggplot(millas, aes(____, ____)) +
-  geom_____()
+ggplot(millas, aes(autopista, cilindros)) +
+  geom_point(color = "blue")
 ```
-
 
 2. Hacé un gráfico similar pero de "autopista" versus "ciudad". 
 
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad)) +
+  geom_point(color = "blue")
 ```
 
 
 3. ¿Qué pasa cuando haces un gráfico de  de "clase" versus "traccion"? ¿Por qué no es útil este gráfico?
+Este grafico no es utili porque "clase" y "tracción" son dos variables categoricas, entonces los puntos caen todos en el mismo lugar y no puede verse qué cantidad de observaciones hay en cada combinación de categorías.
 
 ```{r}
-
+ggplot(millas, aes(traccion, clase)) +
+  geom_point(color = "blue")
 ```
 
 
 4. En otro bloque, rehacé el gráfico de "autopista" versus "ciudad" pero ahora asigná la variable "tracción" al color de los puntos. 
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad, , color = traccion)) +
+  geom_point()
 ```
 
 
 5. En otro bloque, rehacé el gráfico de "autopista" versus "ciudad" pero ahora asigná la variable "tracción" al color de los puntos. 
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad, , color = traccion)) +
+  geom_point()
 ```
 
 
 5. ¿Qué ocurre si se asigna o mapea una estética a algo diferente del nombre de una variable, como `aes(color = cilindrada < 3)`?
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad, , color = cilindrada < 3)) +
+  geom_point()
 ```
 
 
@@ -84,6 +90,7 @@ ggplot(millas, aes(____, ____)) +
 ¿Qué ventajas y desventajas tiene este geom?
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad)) +
+  geom_jitter(aes(color = cilindrada < 3))
 ```
 
